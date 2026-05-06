@@ -1,3 +1,15 @@
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+
+
+![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3+-orange)
+
+
+![Status](https://img.shields.io/badge/Status-Complete-success)
+
+
+![License](https://img.shields.io/badge/License-MIT-green)
+
+
 # 🎓 Prédiction du Décrochage Scolaire
 
 Système d'alerte précoce pour identifier les élèves à risque d'échec sans attendre les premières évaluations.
