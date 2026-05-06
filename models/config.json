@@ -1,0 +1,11 @@
+{
+  "optimal_threshold": 0.399,
+  "target_recall": 0.8,
+  "achieved_recall": 0.8077,
+  "achieved_precision": 0.4468,
+  "model_type": "Logistic Regression",
+  "training_date": "2026-05-04",
+  "n_features": 34,
+  "n_train_samples": 316,
+  "n_test_samples": 79
+}
