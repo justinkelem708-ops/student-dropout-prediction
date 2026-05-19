@@ -15,6 +15,29 @@
 Système d'alerte précoce pour identifier les élèves à risque d'échec sans attendre les premières évaluations.
 
 ---
+# 🎓 Système de Prédiction du Décrochage Scolaire
+
+![Screenshot](screenshot.png)
+
+## 🚀 Démo en ligne
+
+[Tester l'application](https://student-dropout-prediction-fxj3vscls4vnvm9hpj2263.streamlit.app)
+
+## 📊 Performance
+
+- **Recall** : 80.77% (4 décrocheurs sur 5 détectés)
+- **Precision** : 44.68%
+- **Stratégie** : Détection précoce (sans notes G1/G2)
+
+## 🔧 Technologies
+
+- Python (scikit-learn, pandas)
+- Streamlit (déploiement cloud)
+- Régression Logistique + Feature Engineering
+
+## 💡 Utilisation
+
+L'application permet de prédire le risque de décrochage dès la rentrée scolaire, uniquement avec des données socio-comportementales.
 
 ## 📊 Vue d'ensemble
 
