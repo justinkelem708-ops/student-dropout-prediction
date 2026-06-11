@@ -27,3 +27,4 @@ Thumbs.db
 # Temporary files
 Untitled*.py
 test_*.pyagent/.env 
+agent/.env 
