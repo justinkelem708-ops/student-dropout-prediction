@@ -1,161 +1,173 @@
-![Python](https://img.shields.io/badge/Python-3.11-blue)
+# Student Dropout Prediction System
 
-
-![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3+-orange)
-
-
-![Status](https://img.shields.io/badge/Status-Complete-success)
-
-
-![License](https://img.shields.io/badge/License-MIT-green)
-
-
-# 🎓 Prédiction du Décrochage Scolaire
-
-Système d'alerte précoce pour identifier les élèves à risque d'échec sans attendre les premières évaluations.
+A machine learning system for early detection of students at risk of academic failure,
+designed to identify at-risk profiles before the first evaluations using only
+socio-behavioral data.
 
 ---
-# 🎓 Système de Prédiction du Décrochage Scolaire
 
-![Screenshot](screenshot.png)
+## Project Overview
 
-## 🚀 Démo en ligne
+**Problem**: Traditional dropout detection relies on grade-based indicators,
+which only become available after failure has already occurred.
 
-[Tester l'application](https://student-dropout-prediction-fxj3vscls4vnvm9hpj2263.streamlit.app)
+**Approach**: Predict dropout risk using exclusively socio-behavioral variables
+(family context, attendance, study habits, social behavior), enabling intervention
+before the first exam.
 
-## 📊 Performance
-
-- **Recall** : 80.77% (4 décrocheurs sur 5 détectés)
-- **Precision** : 44.68%
-- **Stratégie** : Détection précoce (sans notes G1/G2)
-
-## 🔧 Technologies
-
-- Python (scikit-learn, pandas)
-- Streamlit (déploiement cloud)
-- Régression Logistique + Feature Engineering
-
-## 💡 Utilisation
-
-L'application permet de prédire le risque de décrochage dès la rentrée scolaire, uniquement avec des données socio-comportementales.
-
-## 📊 Vue d'ensemble
-
-**Objectif** : Prédire l'échec scolaire (note < 10/20) à partir de variables socio-comportementales
-
-**Performance** :
-- ✅ Recall : 80.77% (objectif atteint)
-- Precision : 44.68%
-- F1-Score : 0.578
-- AUC-ROC : 0.734
-
-**Modèle retenu** : Régression Logistique (seuil optimisé à 0.399)
+**Key decision**: Deliberate exclusion of G1 and G2 grade variables to ensure
+genuinely early detection capability.
 
 ---
-## 📁 Structure du Projet
 
-```text
+## Model Performance
+
+| Metric    | Value  |
+|-----------|--------|
+| Recall    | 80.77% |
+| Precision | 44.68% |
+| F1-Score  | 0.578  |
+| AUC-ROC   | 0.734  |
+| Threshold | 0.399  |
+
+**Design rationale**: The model is optimized for recall rather than precision.
+In an early warning context, the cost of missing an at-risk student
+significantly exceeds the cost of a false alert.
+
+---
+
+## Dataset
+
+- **Source**: Cortez & Silva (2008), UCI Machine Learning Repository
+- **Size**: 395 students, 34 variables
+- **Target**: Binary classification (fail if final grade < 10/20)
+- **Features**: Academic history, family background, behavioral indicators
+
+---
+
+## Feature Engineering
+
+Three composite variables were created to improve predictive power:
+
+| Feature | Formula | Rationale |
+|---------|---------|-----------|
+| parent_edu_mean | (Medu + Fedu) / 2 | Combined parental education level |
+| total_alcohol | Dalc + Walc | Weekly alcohol consumption index |
+| total_support | schoolsup + famsup | Cumulative academic support |
+| high_risk | failures > 0 AND absences > 10 | Combined risk flag |
+
+---
+
+## System Architecture
 Project1-Dropout/
-├── data/           # Données brutes et préprocessées
-├── notebooks/      # Jupyter notebooks d'analyse
-├── outputs/        # Visualisations et graphiques
-├── reports/        # Rapports markdown
-├── models/         # Modèles sauvegardés
-└── README.md       # Ce fichier de présentation
-```
 
-## 🚀 Installation
+├── app.py                    # Streamlit prediction interface
 
-```bash
-# Créer l'environnement
-conda create -n ml_env python=3.11 -y
-conda activate ml_env
+├── agent/
 
-# Installer les dépendances
-pip install pandas numpy scikit-learn matplotlib seaborn shap
-```
+│   ├── agent.py              # Autonomous alert agent
+
+│   ├── alerter.py            # Email notification system
+
+│   ├── evaluator.py          # Automated model performance monitoring
+
+│   ├── monitor.py            # Weekly automated routine
+
+│   └── researcher.py         # Scientific literature monitoring
+
+├── models/
+
+│   ├── logistic_regression_final.pkl
+
+│   ├── scaler.pkl
+
+│   ├── feature_names.json
+
+│   └── config.json
+
+├── data/
+
+│   ├── X_train.csv
+
+│   ├── X_test.csv
+
+│   ├── y_train.csv
+
+│   └── y_test.csv
+
+└── notebooks/
+
+└── 01_exploration.ipynb
+---
+
+## Autonomous Agent System
+
+Beyond the prediction model, this project includes a multi-component
+autonomous monitoring system:
+
+**Agent** (`agent.py`)
+Reads incoming student data, generates predictions, and sends
+email alerts for at-risk profiles without human intervention.
+
+**Evaluator** (`evaluator.py`)
+Monitors model performance weekly. If recall drops below 75%,
+automatically retrains the model on updated data and saves
+the improved version.
+
+**Researcher** (`researcher.py`)
+Scrapes recent academic publications on dropout prediction,
+analyzes trends and research gaps using an LLM, and generates
+a structured research report to inform model improvements.
+
+**Monitor** (`monitor.py`)
+Orchestrates the full weekly routine: literature review,
+model evaluation, and student analysis.
 
 ---
 
-## 📈 Résultats Clés
+## Deployed Application
 
-### Variables les plus importantes (SHAP)
-1. `failures` : Historique d'échecs passés
-2. `goout` : Fréquence des sorties sociales
-3. `total_support` : Cumul des soutiens (feature créée)
+Live demo: https://student-dropout-prediction-fxj3vscls4vnvm9hpj2263.streamlit.app
 
-### Feature Engineering
-- `total_support` = schoolsup + famsup
-- `parent_edu_mean` = (Medu + Fedu) / 2
-- `high_risk` = (failures > 0) & (absences > 10)
-
-### Décision stratégique
-**Exclusion de G1 et G2** (notes intermédiaires) pour permettre une détection précoce avant le premier examen.
+The interface allows educators to input student profiles and receive:
+- Risk probability score
+- Alert classification (at-risk / stable)
+- Identified risk factors
+- Recommended interventions
 
 ---
 
-## 📊 Visualisations
+## Technical Stack
 
-Toutes les visualisations sont disponibles dans `outputs/` :
-- Courbes Precision-Recall
-- Matrices de confusion
-- Analyse SHAP complète
-- Graphiques d'importance des variables
-
----
-
-## 🎯 Utilisation
-
-```python
-import pickle
-import pandas as pd
-
-# Charger le modèle
-with open('models/logistic_regression_final.pkl', 'rb') as f:
-    model = pickle.load(f)
-
-# Charger le scaler
-with open('models/scaler.pkl', 'rb') as f:
-    scaler = pickle.load(f)
-
-# Prédire pour un nouvel élève
-new_student = pd.DataFrame({...})  # Données élève
-new_student_scaled = scaler.transform(new_student)
-probability = model.predict_proba(new_student_scaled)[:, 1]
-
-# Alerte si probabilité > seuil optimal
-if probability[0] > 0.399:
-    print(f"⚠️ ALERTE : Probabilité d'échec = {probability[0]:.2%}")
-```
+- Python 3.11
+- scikit-learn (Logistic Regression, StandardScaler)
+- pandas, numpy
+- Streamlit (deployment)
+- SHAP (feature importance)
+- schedule (automated agent)
+- arxiv, groq (research agent)
 
 ---
 
-## 📝 Rapports Détaillés
+## Limitations
 
-- `reports/rapport_exploration.md` : Analyse exploratoire complète
-- `reports/rapport_modelisation.md` : Comparaison des 4 modèles
-- `reports/rapport_shap.md` : Interprétabilité SHAP
-- `reports/rapport_final.md` : Synthèse exécutive
-
----
-
-## 🔮 Perspectives d'Amélioration
-
-1. Intégrer données temps réel (retards, sanctions)
-2. Ajouter évaluations formatives courtes
-3. Déployer application Streamlit
-4. Tester sur d'autres établissements
+- Dataset limited to 395 students from Portuguese secondary schools (2008)
+- 19% of dropout cases not detected (atypical profiles)
+- 55% false alert rate (accepted trade-off)
+- Model requires revalidation before deployment in different educational contexts
 
 ---
 
-## 👤 Auteur
+## References
 
-**Justin**  
-Master Application 2027 - AI/Data Science  
-Université Chinoise
+Cortez, P., & Silva, A. (2008). Using Data Mining to Predict Secondary School
+Student Performance. In Proceedings of 5th Annual Future Business Technology
+Conference, Porto, Portugal.
 
 ---
 
-## 📄 Licence
+## Author
 
-Dataset : [UCI ML Repository - Student Performance](https://archive.ics.uci.edu/dataset/320/student+performance)
+Justin Kelem
+Master AI/Data Science Candidate 2027
+GitHub: justinkelem708-ops
