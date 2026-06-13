@@ -60,6 +60,7 @@ Three composite variables were created to improve predictive power:
 
 ## System Architecture
 
+```
 Project1-Dropout/
 |-- app.py                         Streamlit prediction interface
 |-- agent/
@@ -80,8 +81,8 @@ Project1-Dropout/
 |   └-- y_test.csv
 └-- notebooks/
     └-- 01_exploration.ipynb
+```
 ---
-
 ## Autonomous Agent System
 
 Beyond the prediction model, this project includes a multi-component
