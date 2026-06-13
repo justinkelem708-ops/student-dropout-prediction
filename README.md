@@ -60,27 +60,27 @@ Three composite variables were created to improve predictive power:
 
 ## System Architecture
 
-Project1-Dropout/
-|-- app.py                         Streamlit prediction interface
-|-- agent/
-|   |-- agent.py                   Autonomous alert agent
-|   |-- alerter.py                 Email notification system
-|   |-- evaluator.py               Automated model performance monitoring
-|   |-- monitor.py                 Weekly automated routine
-|   └-- researcher.py              Scientific literature monitoring
-|-- models/
-|   |-- logistic_regression_final.pkl
-|   |-- scaler.pkl
-|   |-- feature_names.json
-|   └-- config.json
-|-- data/
-|   |-- X_train.csv
-|   |-- X_test.csv
-|   |-- y_train.csv
-|   └-- y_test.csv
-└-- notebooks/
-    └-- 01_exploration.ipynb
-    
+**Project1-Dropout/**
+<br>├── `app.py` &mdash; Streamlit prediction interface
+<br>├── **agent/**
+<br>│&nbsp;&nbsp;&nbsp;├── `agent.py` &mdash; Autonomous alert agent
+<br>│&nbsp;&nbsp;&nbsp;├── `alerter.py` &mdash; Email notification system
+<br>│&nbsp;&nbsp;&nbsp;├── `evaluator.py` &mdash; Automated model performance monitoring
+<br>│&nbsp;&nbsp;&nbsp;├── `monitor.py` &mdash; Weekly automated routine
+<br>│&nbsp;&nbsp;&nbsp;└── `researcher.py` &mdash; Scientific literature monitoring
+<br>├── **models/**
+<br>│&nbsp;&nbsp;&nbsp;├── `logistic_regression_final.pkl`
+<br>│&nbsp;&nbsp;&nbsp;├── `scaler.pkl`
+<br>│&nbsp;&nbsp;&nbsp;├── `feature_names.json`
+<br>│&nbsp;&nbsp;&nbsp;└── `config.json`
+<br>├── **data/**
+<br>│&nbsp;&nbsp;&nbsp;├── `X_train.csv`
+<br>│&nbsp;&nbsp;&nbsp;├── `X_test.csv`
+<br>│&nbsp;&nbsp;&nbsp;├── `y_train.csv`
+<br>│&nbsp;&nbsp;&nbsp;└── `y_test.csv`
+<br>└── **notebooks/**
+<br>&nbsp;&nbsp;&nbsp;&nbsp;└── `01_exploration.ipynb`
+
 ---
 
 ## Autonomous Agent System
