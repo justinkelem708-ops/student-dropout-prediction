@@ -58,46 +58,48 @@ Three composite variables were created to improve predictive power:
 
 ---
 
-Project1-Dropout/
+```mermaid
+graph TD
+    %% Configuration des styles globaux
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:1px,font-family:monospace;
+    classDef root fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,font-weight:bold;
+    classDef folder fill:#fff3e0,stroke:#f57c00,stroke-width:1px;
 
-|-- app.py
+    %% Nœuds principaux
+    Root[Project1-Dropout]:::root
+    App[app.py : Streamlit User Interface]
+    FolderAgent[agent/]:::folder
+    FolderModels[models/]:::folder
+    FolderData[data/]:::folder
+    FolderNotebooks[notebooks/]:::folder
 
-|-- agent/
+    %% Arborescence principale
+    Root --> App
+    Root --> FolderAgent
+    Root --> FolderModels
+    Root --> FolderData
+    Root --> FolderNotebooks
 
-|   |-- agent.py
+    %% Composants du dossier Agent
+    FolderAgent --> Agent[agent.py : Autonomous Risk Detection]
+    FolderAgent --> Alerter[alerter.py : Email Notification System]
+    FolderAgent --> Evaluator[evaluator.py : Performance Monitoring & Retraining]
+    FolderAgent --> Monitor[monitor.py : Task Scheduler & Automation]
+    FolderAgent --> Researcher[researcher.py : Scientific Literature Veille]
 
-|   |-- alerter.py
+    %% Composants du dossier Models
+    FolderModels --> ModelPkl[logistic_regression_final.pkl : Classifier]
+    FolderModels --> ScalerPkl[scaler.pkl : Data Normalization]
+    FolderModels --> FeaturesJson[feature_names.json : Meta-features]
+    FolderModels --> ConfigJson[config.json : Threshold Configuration]
 
-|   |-- evaluator.py
+    %% Composants du dossier Data
+    FolderData --> TrainSets[X_train.csv / y_train.csv]
+    FolderData --> TestSets[X_test.csv / y_test.csv]
 
-|   |-- monitor.py
-
-|   └-- researcher.py
-
-|-- models/
-
-|   |-- logistic_regression_final.pkl
-
-|   |-- scaler.pkl
-
-|   |-- feature_names.json
-
-|   └-- config.json
-
-|-- data/
-
-|   |-- X_train.csv
-
-|   |-- X_test.csv
-
-|   |-- y_train.csv
-
-|   └-- y_test.csv
-
-└-- notebooks/
-
-└-- 01_exploration.ipynb
----
+    %% Composants du dossier Notebooks
+    FolderNotebooks --> Exploration[01_exploration.ipynb : EDA]
+```
 ## Autonomous Agent System
 
 Beyond the prediction model, this project includes a multi-component
