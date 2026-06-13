@@ -60,53 +60,29 @@ Three composite variables were created to improve predictive power:
 
 ## System Architecture
 
-```mermaid
-graph TD
-    %% Configuration des styles pour un rendu épuré et pro
-    classDef default fill:#fafafa,stroke:#333,stroke-width:1px,font-family:monospace;
-    classDef root fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,font-weight:bold;
-    classDef folder fill:#fff3e0,stroke:#f57c00,stroke-width:1px,font-weight:bold;
+Project1-Dropout/
+|-- app.py                    
+|-- agent/
+|   |-- agent.py             
+|   |-- alerter.py          
+|   |-- evaluator.py          
+|   |-- monitor.py              
+|   └-- researcher.py              
+|-- models/
+|   |-- logistic_regression_final.pkl
+|   |-- scaler.pkl
+|   |-- feature_names.json
+|   └-- config.json
+|-- data/
+|   |-- X_train.csv
+|   |-- X_test.csv
+|   |-- y_train.csv
+|   └-- y_test.csv
+└-- notebooks/
+    └-- 01_exploration.ipynb
 
-    %% Racine du projet
-    Root[Project1-Dropout]:::root
+---
 
-    %% Fichier racine et Dossiers principaux
-    App[app.py : Streamlit prediction interface]
-    FolderAgent[agent/]:::folder
-    FolderModels[models/]:::folder
-    FolderData[data/]:::folder
-    FolderNotebooks[notebooks/]:::folder
-
-    %% Liens du premier niveau
-    Root --> App
-    Root --> FolderAgent
-    Root --> FolderModels
-    Root --> FolderData
-    Root --> FolderNotebooks
-
-    %% Contenu du dossier Agent (Alignement vertical)
-    FolderAgent --> Agent[agent.py : Autonomous alert agent]
-    FolderAgent --> Alerter[alerter.py : Email notification system]
-    FolderAgent --> Evaluator[evaluator.py : Automated model performance monitoring]
-    FolderAgent --> Monitor[monitor.py : Weekly automated routine]
-    FolderAgent --> Researcher[researcher.py : Scientific literature monitoring]
-
-    %% Contenu du dossier Models (Alignement vertical)
-    FolderModels --> ModelPkl[logistic_regression_final.pkl]
-    FolderModels --> ScalerPkl[scaler.pkl]
-    FolderModels --> FeaturesJson[feature_names.json]
-    FolderModels --> ConfigJson[config.json]
-
-    %% Contenu du dossier Data (Alignement vertical)
-    FolderData --> XTrain[X_train.csv]
-    FolderData --> XTest[X_test.csv]
-    FolderData --> YTrain[y_train.csv]
-    FolderData --> YTest[y_test.csv]
-
-    %% Contenu du dossier Notebooks (Alignement vertical)
-    FolderNotebooks --> Notebook[01_exploration.ipynb]
-```
-```
 ## Autonomous Agent System
 
 Beyond the prediction model, this project includes a multi-component
