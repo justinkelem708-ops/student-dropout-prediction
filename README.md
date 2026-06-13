@@ -58,47 +58,37 @@ Three composite variables were created to improve predictive power:
 
 ---
 
+## System Architecture
+
+---
 ```mermaid
 graph TD
-    %% Configuration des styles globaux
-    classDef default fill:#f9f9f9,stroke:#333,stroke-width:1px,font-family:monospace;
-    classDef root fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,font-weight:bold;
-    classDef folder fill:#fff3e0,stroke:#f57c00,stroke-width:1px;
+    %% Style Configuration
+    classDef default fill:#fafafa,stroke:#444,stroke-width:1px,font-family:monospace;
+    classDef primary fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,font-weight:bold;
+    classDef accent fill:#e8f5e9,stroke:#2e7d32,stroke-width:1px;
+    classDef alert fill:#ffebee,stroke:#c62828,stroke-width:1px;
 
-    %% Nœuds principaux
-    Root[Project1-Dropout]:::root
-    App[app.py : Streamlit User Interface]
-    FolderAgent[agent/]:::folder
-    FolderModels[models/]:::folder
-    FolderData[data/]:::folder
-    FolderNotebooks[notebooks/]:::folder
+    %% Core Platform
+    subgraph User_Interface [1. Interface Utilisateur]
+        App[app.py : Streamlit Web Application]:::primary
+    end
 
-    %% Arborescence principale
-    Root --> App
-    Root --> FolderAgent
-    Root --> FolderModels
-    Root --> FolderData
-    Root --> FolderNotebooks
+    %% Autonomous Core
+    subgraph Automation_Layer [2. Écosystème d'Agents Autonomes]
+        Monitor[monitor.py : Task Scheduler] --> Agent[agent.py : Risk Detection Engine]
+        Agent --> Alerter[alerter.py : Email Notification System]:::alert
+        Researcher[researcher.py : ArXiv & Claude Literature Veille]
+    end
 
-    %% Composants du dossier Agent
-    FolderAgent --> Agent[agent.py : Autonomous Risk Detection]
-    FolderAgent --> Alerter[alerter.py : Email Notification System]
-    FolderAgent --> Evaluator[evaluator.py : Performance Monitoring & Retraining]
-    FolderAgent --> Monitor[monitor.py : Task Scheduler & Automation]
-    FolderAgent --> Researcher[researcher.py : Scientific Literature Veille]
-
-    %% Composants du dossier Models
-    FolderModels --> ModelPkl[logistic_regression_final.pkl : Classifier]
-    FolderModels --> ScalerPkl[scaler.pkl : Data Normalization]
-    FolderModels --> FeaturesJson[feature_names.json : Meta-features]
-    FolderModels --> ConfigJson[config.json : Threshold Configuration]
-
-    %% Composants du dossier Data
-    FolderData --> TrainSets[X_train.csv / y_train.csv]
-    FolderData --> TestSets[X_test.csv / y_test.csv]
-
-    %% Composants du dossier Notebooks
-    FolderNotebooks --> Exploration[01_exploration.ipynb : EDA]
+    %% Machine Learning Operations
+    subgraph MLOps_Layer [3. Pipeline Données & Performance]
+        Data[data/ : Train & Test CSV Sets] --> Evaluator[evaluator.py : Automated Retraining]:::accent
+        Models[models/ : Model & Scaler Artefacts] --> App
+        Models --> Agent
+        Evaluator -.->|Auto-Update| Models
+    end
+```
 ```
 ## Autonomous Agent System
 
