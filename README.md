@@ -61,13 +61,13 @@ Three composite variables were created to improve predictive power:
 ## System Architecture
 
 Project1-Dropout/
-|-- app.py                    
+|-- app.py                         Streamlit prediction interface
 |-- agent/
-|   |-- agent.py             
-|   |-- alerter.py          
-|   |-- evaluator.py          
-|   |-- monitor.py              
-|   └-- researcher.py              
+|   |-- agent.py                   Autonomous alert agent
+|   |-- alerter.py                 Email notification system
+|   |-- evaluator.py               Automated model performance monitoring
+|   |-- monitor.py                 Weekly automated routine
+|   └-- researcher.py              Scientific literature monitoring
 |-- models/
 |   |-- logistic_regression_final.pkl
 |   |-- scaler.pkl
@@ -80,7 +80,7 @@ Project1-Dropout/
 |   └-- y_test.csv
 └-- notebooks/
     └-- 01_exploration.ipynb
-
+    
 ---
 
 ## Autonomous Agent System
