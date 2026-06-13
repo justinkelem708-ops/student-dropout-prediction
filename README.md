@@ -60,34 +60,51 @@ Three composite variables were created to improve predictive power:
 
 ## System Architecture
 
----
 ```mermaid
 graph TD
-    %% Style Configuration
-    classDef default fill:#fafafa,stroke:#444,stroke-width:1px,font-family:monospace;
-    classDef primary fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,font-weight:bold;
-    classDef accent fill:#e8f5e9,stroke:#2e7d32,stroke-width:1px;
-    classDef alert fill:#ffebee,stroke:#c62828,stroke-width:1px;
+    %% Configuration des styles pour un rendu épuré et pro
+    classDef default fill:#fafafa,stroke:#333,stroke-width:1px,font-family:monospace;
+    classDef root fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,font-weight:bold;
+    classDef folder fill:#fff3e0,stroke:#f57c00,stroke-width:1px,font-weight:bold;
 
-    %% Core Platform
-    subgraph User_Interface [1. Interface Utilisateur]
-        App[app.py : Streamlit Web Application]:::primary
-    end
+    %% Racine du projet
+    Root[Project1-Dropout]:::root
 
-    %% Autonomous Core
-    subgraph Automation_Layer [2. Écosystème d'Agents Autonomes]
-        Monitor[monitor.py : Task Scheduler] --> Agent[agent.py : Risk Detection Engine]
-        Agent --> Alerter[alerter.py : Email Notification System]:::alert
-        Researcher[researcher.py : ArXiv & Claude Literature Veille]
-    end
+    %% Fichier racine et Dossiers principaux
+    App[app.py : Streamlit prediction interface]
+    FolderAgent[agent/]:::folder
+    FolderModels[models/]:::folder
+    FolderData[data/]:::folder
+    FolderNotebooks[notebooks/]:::folder
 
-    %% Machine Learning Operations
-    subgraph MLOps_Layer [3. Pipeline Données & Performance]
-        Data[data/ : Train & Test CSV Sets] --> Evaluator[evaluator.py : Automated Retraining]:::accent
-        Models[models/ : Model & Scaler Artefacts] --> App
-        Models --> Agent
-        Evaluator -.->|Auto-Update| Models
-    end
+    %% Liens du premier niveau
+    Root --> App
+    Root --> FolderAgent
+    Root --> FolderModels
+    Root --> FolderData
+    Root --> FolderNotebooks
+
+    %% Contenu du dossier Agent (Alignement vertical)
+    FolderAgent --> Agent[agent.py : Autonomous alert agent]
+    FolderAgent --> Alerter[alerter.py : Email notification system]
+    FolderAgent --> Evaluator[evaluator.py : Automated model performance monitoring]
+    FolderAgent --> Monitor[monitor.py : Weekly automated routine]
+    FolderAgent --> Researcher[researcher.py : Scientific literature monitoring]
+
+    %% Contenu du dossier Models (Alignement vertical)
+    FolderModels --> ModelPkl[logistic_regression_final.pkl]
+    FolderModels --> ScalerPkl[scaler.pkl]
+    FolderModels --> FeaturesJson[feature_names.json]
+    FolderModels --> ConfigJson[config.json]
+
+    %% Contenu du dossier Data (Alignement vertical)
+    FolderData --> XTrain[X_train.csv]
+    FolderData --> XTest[X_test.csv]
+    FolderData --> YTrain[y_train.csv]
+    FolderData --> YTest[y_test.csv]
+
+    %% Contenu du dossier Notebooks (Alignement vertical)
+    FolderNotebooks --> Notebook[01_exploration.ipynb]
 ```
 ```
 ## Autonomous Agent System
